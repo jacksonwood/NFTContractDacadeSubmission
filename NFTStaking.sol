@@ -112,7 +112,7 @@ contract NFTStaking is ERC721, Ownable {
         require(hasBeenSet == true, "The owner must first call setAmountPerNFT()");
         require(hasBeenClaimed[_tokenId] == false, "This NFT has already claimed its tokens");
         require(ownedBy[_tokenId] == msg.sender, "You do not own this NFT");
-        payable(msg.sender).transfer(amountPerNFT);
+        payable(msg.sender).call{value: amountPerNFT};
         funding -= amountPerNFT;
     }
 
